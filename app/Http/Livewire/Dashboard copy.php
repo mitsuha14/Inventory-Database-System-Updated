@@ -1,5 +1,6 @@
 <?php
 
+// Dashboard.php (Livewire Component)
 namespace App\Http\Livewire;
 
 use Livewire\Component;
@@ -11,15 +12,7 @@ class Dashboard extends Component
 
     public function mount()
     {
-        $this->inventories = Inventory::with([
-            'accountablePersonnelRelation',
-            'divisionRelation',
-            'provinceRelation',
-            'operatingunitRelation',
-            'makeRelation',
-            'typeRelation',
-            'statusRelation'
-        ])->get();
+        $this->inventories = Inventory::with('accountable_personnelRelation', 'divisionRelation', 'provinceRelation', 'operating_uniRelationt', 'makeRelation', 'typeRelation', 'statusRelation')->get();
     }
 
     public function render()

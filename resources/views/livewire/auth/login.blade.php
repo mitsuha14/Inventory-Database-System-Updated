@@ -11,10 +11,10 @@
                                 <div class="p-6 pb-0 mb-0 bg-transparent border-b-0 rounded-t-2xl">
                                     <h3 class="relative z-10 font-bold text-transparent bg-gradient-cyan bg-clip-text">
                                         Welcome back!</h3>
-                                    <p class="mb-0">Create a new acount<br></p>
-                                    <p class="mb-0">OR Sign in with these credentials:</p>
-                                    <p class="mb-0">Email: <b>admin@softui.com</b></p>
-                                    <p class="mb-0">Password: <b>secret</b></p>
+                                    <p class="mb-0"><br></p>
+                                    <p class="mb-0">Sign in with these credentials:</p>
+                                    <p class="mb-0">Email: <b>dilg_rictu@gmail.com</b></p>
+                                    <p class="mb-0">Password: <b>dilgrictu</b></p>
                                 </div>
 
                                 <div class="flex-auto p-6">
@@ -74,13 +74,17 @@
                                 <div
                                     class="p-6 px-1 pt-0 text-center bg-transparent border-t-0 border-t-solid rounded-b-2xl lg:px-2">
                                     <p class="mx-auto mb-6 leading-normal text-size-sm">
-                                        Forgot your password? Reset your password
-                                        <a href="{{ route('forgot-password') }}"
-                                            class="relative z-10 font-semibold text-transparent bg-gradient-cyan bg-clip-text">here</a>.<br />
-                                        Don't have an account?
-                                        <a href="{{ route('register') }}"
+                                        Forgot your password? 
+                                        <br />
+                                            Contact your Database Administrator 
+                                            <a href="mailto:dlramones@gmail.com"
+                                            class="relative z-10 font-semibold text-transparent bg-gradient-cyan bg-clip-text">
+                                            here
+                                         </a>
+                                         
+                                        {{-- <a href="{{ route('register') }}"
                                             class="relative z-10 font-semibold text-transparent bg-gradient-cyan bg-clip-text">Sign
-                                            up</a>.
+                                            up</a>. --}}
                                     </p>
                                 </div>
                             </div>
@@ -89,7 +93,7 @@
                             <div
                                 class="absolute top-0 hidden w-3/5 h-full -mr-32 overflow-hidden -skew-x-10 -right-40 rounded-bl-xl md:block">
                                 <div class="absolute inset-x-0 top-0 z-0 h-full -ml-16 bg-cover skew-x-10"
-                                    style="background-image: url('../assets/img/curved-images/curved6.jpg')"></div>
+                                    style="background-image: url('../assets/img/curved-images/DILG_logo.png')"></div>
                             </div>
                         </div>
                     </div>
