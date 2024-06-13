@@ -7,30 +7,12 @@ use App\Http\Livewire\Auth\ResetPassword;
 use App\Http\Livewire\Auth\Register;
 use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Dashboard;
-use App\Http\Livewire\Billing;
-use App\Http\Livewire\Profile;
-use App\Http\Livewire\Tables;
-use App\Http\Livewire\StaticSignIn;
-use App\Http\Livewire\StaticSignUp;
-use App\Http\Livewire\Rtl;
 
-use App\Http\Livewire\LaravelExamples\UserProfile;
-use App\Http\Livewire\LaravelExamples\UserManagement;
-use App\Http\Livewire\VirtualReality;
-use Illuminate\Http\Request;
+use App\Http\Livewire\InventoryForm;
+use App\Http\Livewire\LaravelExamples\inventorymanagement;
 
 use App\Http\Controllers\InventoryController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/', function () {
     return redirect('/login');
@@ -45,17 +27,14 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    // Route::get('/dashboard', Dashboard::class)->name('dashboard');
-    Route::get('/dashboard', Dashboard::class)->name('dashboard');
-    Route::get('/billing', Billing::class)->name('billing');
-    Route::get('/profile', Profile::class)->name('profile');
-    Route::get('/tables', Tables::class)->name('tables');
-    Route::get('/static-sign-in', StaticSignIn::class)->name('sign-in');
-    Route::get('/static-sign-up', StaticSignUp::class)->name('static-sign-up');
-    Route::get('/rtl', Rtl::class)->name('rtl');
-    Route::get('/virtual-reality', VirtualReality::class)->name('virtual-reality');
 
-    Route::get('/user-profile', UserProfile::class)->name('user-profile');
-    
-    Route::get('/user-management', UserManagement::class)->name('user-management');
+
+    Route::get('/dashboard', Dashboard::class)->name('dashboard');
+    Route::get('/add-inventory', InventoryForm::class)->name('add-inventory'); // Use InventoryForm here
+    Route::get('/inventory-management', inventorymanagement::class)->name('inventory-management');
+
+    Route::get('/inventory/{id}/edit', [InventoryController::class, 'edit'])->name('inventory.edit');
+    Route::post('/inventory', [InventoryController::class, 'store'])->name('inventory.store');
+    Route::delete('/inventory/{id}', [InventoryController::class, 'destroy'])->name('inventory.delete');
+
 });

@@ -30,104 +30,126 @@
                     <h3 class="font-bold py-3">Adding Inventory</h3>
                     <h5 class="font-bold py-3">Personnel Information</h5>
 
-                    <form wire:submit="save">
+                    @if (session()->has('message'))
+                        <div class="alert alert-success">
+                            {{ session('message') }}
+                        </div>
+                    @endif
 
+                    <form wire:submit.prevent="save">
+                        @csrf
                         <div class="flex flex-wrap -mx-3">
-
                             {{-- L-1 --}}
                             <div class="max-w-full px-3 w-1/2 lg:flex-none">
                                 <div class="flex flex-col h-full">
+
+
                                     <h6 class="font-bold leading-tight uppercase text-size-xs text-slate-500">
                                         Accountable Personnel
                                     </h6>
                                     <div class="mb-4">
-                                        <input wire:model.blur="inventory.accountable_personnel_id" type="text"
+                                        <select wire:model="inventory.accountable_personnel_id"
                                             class="text-size-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
-                                            placeholder="Accountable Personnel ID" id="accountable-personnel-id"
-                                            required />
+                                            id="accountable-personnel-id" required>
+                                            <option value="">Select Accountable Personnel</option>
+                                            @foreach ($accountablePersonnelOptions as $id => $name)
+                                                <option value="{{ $id }}">{{ $name }}</option>
+                                            @endforeach
+                                        </select>
                                         @error('inventory.accountable_personnel_id')
-                                            <p class="text-size-sm text-red-500">{{ $message }}</p>
+                                            <span class="error">{{ $message }}</span>
                                         @enderror
                                     </div>
 
-                                    <h6 class="font-bold leading-tight uppercase text-size-xs text-slate-500">Division
+                                    <h6 class="font-bold leading-tight uppercase text-size-xs text-slate-500">
+                                        Division
                                     </h6>
-
                                     <div class="mb-4">
-                                        <input wire:model.blur="inventory.division_id" type="text"
+                                        <select wire:model="inventory.division_id"
                                             class="text-size-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
-                                            placeholder="Division ID" id="division-id" required />
+                                            id="division-id" required>
+                                            <option value="">Select Division</option>
+                                            @foreach ($divisionOptions as $id => $name)
+                                                <option value="{{ $id }}">{{ $name }}</option>
+                                            @endforeach
+                                        </select>
                                         @error('inventory.division_id')
                                             <p class="text-size-sm text-red-500">{{ $message }}</p>
                                         @enderror
                                     </div>
                                 </div>
                             </div>
-                            {{-- L-1 --}}
-
-
                             {{-- R-1 --}}
                             <div class="max-w-full px-3 w-1/2 lg:flex-none">
                                 <div class="flex flex-col h-full">
                                     <h6 class="font-bold leading-tight uppercase text-size-xs text-slate-500">Province
                                     </h6>
-
                                     <div class="mb-4">
-                                        <input wire:model.blur="inventory.province_id" type="text"
+                                        <select wire:model="inventory.province_id"
                                             class="text-size-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
-                                            placeholder="Province ID" id="province-id" required />
+                                            id="province-id" required>
+                                            <option value="">Select Province</option>
+                                            @foreach ($provinceOptions as $id => $name)
+                                                <option value="{{ $id }}">{{ $name }}</option>
+                                            @endforeach
+                                        </select>
                                         @error('inventory.province_id')
                                             <p class="text-size-sm text-red-500">{{ $message }}</p>
                                         @enderror
                                     </div>
-
                                     <h6 class="font-bold leading-tight uppercase text-size-xs text-slate-500">Operating
-                                        Unit
-                                    </h6>
-
+                                        Unit</h6>
                                     <div class="mb-4">
-                                        <input wire:model.blur="inventory.operating_unit_id" type="text"
+                                        <select wire:model="inventory.operating_unit_id"
                                             class="text-size-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
-                                            placeholder="Operating Unit ID" id="operating-unit-id" required />
+                                            id="operating-unit-id" required>
+                                            <option value="">Select Operating Unit</option>
+                                            @foreach ($operatingUnitOptions as $id => $name)
+                                                <option value="{{ $id }}">{{ $name }}</option>
+                                            @endforeach
+                                        </select>
                                         @error('inventory.operating_unit_id')
                                             <p class="text-size-sm text-red-500">{{ $message }}</p>
                                         @enderror
                                     </div>
                                 </div>
                             </div>
-                            {{-- R-1 --}}
                         </div>
-                        <h5 class="font-bold py-3">Item Information
+                        <h5 class="font-bold py-3">Item Information</h5>
                         <div class="flex flex-wrap -mx-3">
                             {{-- L-2 --}}
                             <div class="max-w-full px-3 w-1/2 lg:flex-none">
                                 <div class="flex flex-col h-full">
-                                    <h6 class="font-bold leading-tight uppercase text-size-xs text-slate-500">Make
-                                    </h6>
+                                    <h6 class="font-bold leading-tight uppercase text-size-xs text-slate-500">Make</h6>
                                     <div class="mb-4">
-                                        <input wire:model.blur="inventory.make_id" type="text"
+                                        <select wire:model="inventory.make_id"
                                             class="text-size-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
-                                            placeholder="Make ID" id="make-id" required />
+                                            id="make-id" required>
+                                            <option value="">Select Make</option>
+                                            @foreach ($makeOptions as $id => $name)
+                                                <option value="{{ $id }}">{{ $name }}</option>
+                                            @endforeach
+                                        </select>
                                         @error('inventory.make_id')
                                             <p class="text-size-sm text-red-500">{{ $message }}</p>
                                         @enderror
                                     </div>
-
-                                    <h6 class="font-bold leading-tight uppercase text-size-xs text-slate-500">Type
-                                    </h6>
-
+                                    <h6 class="font-bold leading-tight uppercase text-size-xs text-slate-500">Type</h6>
                                     <div class="mb-4">
-                                        <input wire:model.blur="inventory.type_id" type="text"
+                                        <select wire:model="inventory.type_id"
                                             class="text-size-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
-                                            placeholder="Type ID" id="type-id" required />
+                                            id="type-id" required>
+                                            <option value="">Select Type</option>
+                                            @foreach ($typeOptions as $id => $name)
+                                                <option value="{{ $id }}">{{ $name }}</option>
+                                            @endforeach
+                                        </select>
                                         @error('inventory.type_id')
                                             <p class="text-size-sm text-red-500">{{ $message }}</p>
                                         @enderror
                                     </div>
-
                                     <h6 class="font-bold leading-tight uppercase text-size-xs text-slate-500">Serial
-                                        Number
-                                    </h6>
+                                        Number</h6>
                                     <div class="mb-4">
                                         <input wire:model.blur="inventory.serial_number" type="text"
                                             class="text-size-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
@@ -136,32 +158,22 @@
                                             <p class="text-size-sm text-red-500">{{ $message }}</p>
                                         @enderror
                                     </div>
-
-
                                     <h6 class="font-bold leading-tight uppercase text-size-xs text-slate-500">
                                         Description</h6>
                                     <div class="mb-4">
-                                        <textarea wire:model.blur="inventory.description"
+                                        <input wire:model.blur="inventory.description" type="text"
                                             class="text-size-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
-                                            placeholder="Description" id="description" rows="3">{{ old('inventory.description') }}</textarea>
+                                            placeholder="Description" id="description" />
                                         @error('inventory.description')
                                             <p class="text-size-sm text-red-500">{{ $message }}</p>
                                         @enderror
                                     </div>
-
-
-
                                 </div>
                             </div>
-                            {{-- L-2 --}}
-
-
                             {{-- R-2 --}}
                             <div class="max-w-full px-3 w-1/2 lg:flex-none">
                                 <div class="flex flex-col h-full">
-                                    <h6 class="font-bold leading-tight uppercase text-size-xs text-slate-500">Brand
-                                    </h6>
-
+                                    <h6 class="font-bold leading-tight uppercase text-size-xs text-slate-500">Brand</h6>
                                     <div class="mb-4">
                                         <input wire:model.blur="inventory.brand" type="text"
                                             class="text-size-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
@@ -170,140 +182,120 @@
                                             <p class="text-size-sm text-red-500">{{ $message }}</p>
                                         @enderror
                                     </div>
-
                                     <h6 class="font-bold leading-tight uppercase text-size-xs text-slate-500">Model
-                                        </h6>
-
+                                    </h6>
                                     <div class="mb-4">
                                         <input wire:model.blur="inventory.model" type="text"
                                             class="text-size-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
-                                            placeholder="Model" id="models" />
+                                            placeholder="Model" id="model" />
                                         @error('inventory.model')
                                             <p class="text-size-sm text-red-500">{{ $message }}</p>
                                         @enderror
                                     </div>
-
-                                </div>
-                            </div>
-                            {{-- R-2 --}}
-
-                        </div>
-
-
-
-                        <h5 class="font-bold py-3">Additional Information
-                        </h5>
-
-                        <div class="flex flex-wrap -mx-3">
-                            <div class="max-w-full px-3 w-1/2 lg:flex-none">
-                                <div class="flex flex-col h-full">
-
-
                                     <h6 class="font-bold leading-tight uppercase text-size-xs text-slate-500">Property
-                                        Number
-                                    </h6>
+                                        Number</h6>
                                     <div class="mb-4">
-                                        <input wire:model.blur="inventory.property_number" type="number"
+                                        <input wire:model.blur="inventory.property_number" type="text"
                                             class="text-size-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
                                             placeholder="Property Number" id="property-number" />
                                         @error('inventory.property_number')
                                             <p class="text-size-sm text-red-500">{{ $message }}</p>
                                         @enderror
                                     </div>
-
-
+                                </div>
+                            </div>
+                        </div>
+                        <h5 class="font-bold py-3">Property Information</h5>
+                        <div class="flex flex-wrap -mx-3">
+                            {{-- L-3 --}}
+                            <div class="max-w-full px-3 w-1/2 lg:flex-none">
+                                <div class="flex flex-col h-full">
                                     <h6 class="font-bold leading-tight uppercase text-size-xs text-slate-500">
                                         Acquisition Date</h6>
-
                                     <div class="mb-4">
                                         <input wire:model.blur="inventory.acquisition_date" type="date"
                                             class="text-size-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
-                                            id="acquisition-date" required />
+                                            placeholder="Acquisition Date" id="acquisition-date" required />
                                         @error('inventory.acquisition_date')
                                             <p class="text-size-sm text-red-500">{{ $message }}</p>
                                         @enderror
                                     </div>
-
-                                    <h6 class="font-bold leading-tight uppercase text-size-xs text-slate-500">Balance Per Card
-                                    </h6>
+                                    <h6 class="font-bold leading-tight uppercase text-size-xs text-slate-500">Balance
+                                        Per Card</h6>
                                     <div class="mb-4">
-                                        <input wire:model.blur="inventory.balance_per_card" type="number" step="0.01"
+                                        <input wire:model.blur="inventory.balance_per_card" type="text"
                                             class="text-size-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
-                                            placeholder="Balance Per Card" id="balance_per_card" required />
-                                        @error('inventory.amount')
+                                            placeholder="Balance Per Card" id="balance-per-card" required />
+                                        @error('inventory.balance_per_card')
                                             <p class="text-size-sm text-red-500">{{ $message }}</p>
                                         @enderror
                                     </div>
-
                                     <h6 class="font-bold leading-tight uppercase text-size-xs text-slate-500">Source
                                     </h6>
-
                                     <div class="mb-4">
                                         <input wire:model.blur="inventory.source" type="text"
                                             class="text-size-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
-                                            placeholder="source" id="source" />
+                                            placeholder="Source" id="source" />
                                         @error('inventory.source')
                                             <p class="text-size-sm text-red-500">{{ $message }}</p>
                                         @enderror
                                     </div>
-
-                                    <h6 class="font-bold leading-tight uppercase text-size-xs text-slate-500">
-                                        Remarks</h6>
+                                    <h6 class="font-bold leading-tight uppercase text-size-xs text-slate-500">Remarks
+                                    </h6>
                                     <div class="mb-4">
-                                        <textarea wire:model.blur="inventory.remarks"
+                                        <input wire:model.blur="inventory.remarks" type="text"
                                             class="text-size-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
-                                            placeholder="Remarks" id="remarks" rows="4">{{ old('inventory.remarks') }}</textarea>
+                                            placeholder="Remarks" id="remarks" />
                                         @error('inventory.remarks')
                                             <p class="text-size-sm text-red-500">{{ $message }}</p>
                                         @enderror
                                     </div>
-
-
                                 </div>
                             </div>
+                            {{-- R-3 --}}
                             <div class="max-w-full px-3 w-1/2 lg:flex-none">
                                 <div class="flex flex-col h-full">
-                                    <h6 class="font-bold leading-tight uppercase text-size-xs text-slate-500">Unit Value
-                                    </h6>
-
+                                    <h6 class="font-bold leading-tight uppercase text-size-xs text-slate-500">Unit
+                                        Value</h6>
                                     <div class="mb-4">
-                                        <input wire:model.blur="inventory.unit_value" type="number" min="1"
+                                        <input wire:model.blur="inventory.unit_value" type="text"
                                             class="text-size-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
-                                            placeholder="Unit Value" id="unit_value" required />
+                                            placeholder="Unit Value" id="unit-value" required />
                                         @error('inventory.unit_value')
                                             <p class="text-size-sm text-red-500">{{ $message }}</p>
                                         @enderror
                                     </div>
-
-                                    <h6 class="font-bold leading-tight uppercase text-size-xs text-slate-500">Year Acquired</h6>
-
+                                    <h6 class="font-bold leading-tight uppercase text-size-xs text-slate-500">Year
+                                        Acquired</h6>
                                     <div class="mb-4">
                                         <input wire:model.blur="inventory.year_acquired" type="text"
                                             class="text-size-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
-                                            placeholder="Year Acquired (e.g., 2024)" id="year_acquired" pattern="\d{4}" required />
+                                            placeholder="Year Acquired" id="year-acquired" required />
                                         @error('inventory.year_acquired')
                                             <p class="text-size-sm text-red-500">{{ $message }}</p>
                                         @enderror
                                     </div>
-                                    
-
-                                    <h6 class="font-bold leading-tight uppercase text-size-xs text-slate-500">On Hand Per Count</h6>
-
+                                    <h6 class="font-bold leading-tight uppercase text-size-xs text-slate-500">On-Hand
+                                        Per Count</h6>
                                     <div class="mb-4">
-                                        <input wire:model.blur="inventory.on_hand_per_count" type="number" min="0" step="1"
+                                        <input wire:model.blur="inventory.on_hand_per_count" type="text"
                                             class="text-size-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
-                                            placeholder="On Hand Per Count" id="on_hand_per_count" required />
+                                            placeholder="On-Hand Per Count" id="on-hand-per-count" required />
                                         @error('inventory.on_hand_per_count')
                                             <p class="text-size-sm text-red-500">{{ $message }}</p>
                                         @enderror
-                                    </div>                                    
-
-                                    <h6 class="font-bold leading-tight uppercase text-size-xs text-slate-500">Status</h6>
-
+                                    </div>
+                                    <h6 class="font-bold leading-tight uppercase text-size-xs text-slate-500">Status
+                                    </h6>
                                     <div class="mb-4">
-                                        <input wire:model.blur="inventory.status_id" type="text"
+                                        <select wire:model="inventory.status_id"
                                             class="text-size-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
-                                            placeholder="Status" id="inventory_status" required />
+                                            id="status-id" required>
+                                            <option value="">Select Status</option>
+                                            @foreach ($statusOptions as $id => $name)
+                                                <option value="{{ $id }}">{{ $name }}</option>
+                                            @endforeach
+                                        </select>
                                         @error('inventory.status_id')
                                             <p class="text-size-sm text-red-500">{{ $message }}</p>
                                         @enderror
@@ -311,12 +303,14 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="mt-6">
+                        <div class="flex justify-end">
                             <button type="submit"
-                                class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Save</button>
+                                class="inline-block px-6 py-3 mb-0 font-bold text-center text-white uppercase align-middle transition-all border-0 rounded cursor-pointer bg-fuchsia-500 hover:-translate-y-px active:shadow-soft-xs leading-pro text-size-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25"
+                                wire:loading.attr="disabled">
+                                <span wire:loading.remove wire:target="save">Save</span>
+                                <span wire:loading wire:target="save">Saving...</span>
+                            </button>
                         </div>
-                    </form>
                 </div>
             </div>
         </div>
