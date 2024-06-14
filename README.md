@@ -48,8 +48,11 @@ And Laravel: https://laravel.com/docs/10.x
 2. composer install
 3. add .env and change the database name to ims_database
 4. php artisan key:generate
-5. php artisan serve
-6. npm run dev
+5. php artisan migrate
+6. php artisan db:seed
+7. php artisan serve
+8. npm run dev
+
 
 ## Installation
 1. Unzip the downloaded archive
