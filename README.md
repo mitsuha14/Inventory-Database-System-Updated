@@ -43,6 +43,13 @@ If you don't already have an Apache local environment with PHP and MySQL, use on
 Also, you will need to install Composer: https://getcomposer.org/doc/00-intro.md   
 And Laravel: https://laravel.com/docs/10.x
 
+## New Installation Process
+1. npm install
+2. composer install
+3. add .env and change the database name to ims_database
+4. php artisan key:generate
+5. php artisan serve
+6. npm run dev
 
 ## Installation
 1. Unzip the downloaded archive
