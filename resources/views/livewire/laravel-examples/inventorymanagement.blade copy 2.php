@@ -29,46 +29,44 @@
                 <table id="inventory-table" class="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
                     <thead>
                         <tr>
-                            <th class="px-6 py-3 font-bold text-left uppercase bg-transparent border-b border-gray-200 shadow-none text-xs tracking-wide whitespace-nowrap text-slate-400 cursor-pointer"
-                                onclick="sortTable(0)">
+                            <th
+                                class="px-6 py-3 font-bold text-left uppercase bg-transparent border-b border-gray-200 shadow-none text-xs tracking-wide whitespace-nowrap text-slate-400">
                                 Type
                             </th>
-                            <th class="px-6 py-3 font-bold text-left uppercase bg-transparent border-b border-gray-200 shadow-none text-xs tracking-wide whitespace-nowrap text-slate-400 cursor-pointer"
-                                onclick="sortTable(1)">
+                            <th
+                                class="px-6 py-3 font-bold text-left uppercase bg-transparent border-b border-gray-200 shadow-none text-xs tracking-wide whitespace-nowrap text-slate-400">
                                 Brand
                             </th>
-                            <th class="px-6 py-3 font-bold text-left uppercase bg-transparent border-b border-gray-200 shadow-none text-xs tracking-wide whitespace-nowrap text-slate-400 cursor-pointer"
-                                onclick="sortTable(2)">
+                            <th
+                                class="px-6 py-3 font-bold text-left uppercase bg-transparent border-b border-gray-200 shadow-none text-xs tracking-wide whitespace-nowrap text-slate-400">
                                 Accountable Personnel
                             </th>
-                            <th class="px-6 py-3 pl-2 font-bold text-left uppercase bg-transparent border-b border-gray-200 shadow-none text-xs tracking-wide whitespace-nowrap text-slate-400 cursor-pointer"
-                                onclick="sortTable(3)">
+                            <th
+                                class="px-6 py-3 pl-2 font-bold text-left uppercase bg-transparent border-b border-gray-200 shadow-none text-xs tracking-wide whitespace-nowrap text-slate-400">
                                 Division
                             </th>
-                            <th class="px-6 py-3 pl-2 font-bold text-left uppercase bg-transparent border-b border-gray-200 shadow-none text-xs tracking-wide whitespace-nowrap text-slate-400 cursor-pointer"
-                                onclick="sortTable(4)">
+                            <th
+                                class="px-6 py-3 pl-2 font-bold text-left uppercase bg-transparent border-b border-gray-200 shadow-none text-xs tracking-wide whitespace-nowrap text-slate-400">
                                 Province
                             </th>
-                            <th class="px-6 py-3 font-bold text-center uppercase bg-transparent border-b border-gray-200 shadow-none text-xs tracking-wide whitespace-nowrap text-slate-400 cursor-pointer"
-                                onclick="sortTable(5)">
+                            <th
+                                class="px-6 py-3 font-bold text-center uppercase bg-transparent border-b border-gray-200 shadow-none text-xs tracking-wide whitespace-nowrap text-slate-400">
                                 Operating Unit
                             </th>
-                            <th class="px-6 py-3 font-bold text-center uppercase bg-transparent border-b border-gray-200 shadow-none text-xs tracking-wide whitespace-nowrap text-slate-400 cursor-pointer"
-                                onclick="sortTable(6)">
+                            <th
+                                class="px-6 py-3 font-bold text-center uppercase bg-transparent border-b border-gray-200 shadow-none text-xs tracking-wide whitespace-nowrap text-slate-400">
                                 Acquisition Date
                             </th>
-                            <th class="px-6 py-3 font-bold text-center uppercase bg-transparent border-b border-gray-200 shadow-none text-xs tracking-wide whitespace-nowrap text-slate-400 cursor-pointer"
-                                onclick="sortTable(7)">
+                            <th
+                                class="px-6 py-3 font-bold text-center uppercase bg-transparent border-b border-gray-200 shadow-none text-xs tracking-wide whitespace-nowrap text-slate-400">
                                 Status
                             </th>
                         </tr>
                     </thead>
-
                     <tbody>
                         @foreach ($inventories as $inventory)
-                            <tr onclick="window.location='{{ route('edit-inventory', ['inventoryId' => $inventory->id]) }}'"
-                                class="cursor-pointer hover:bg-gray-100">
-                                <td class="p-2 text-center align-middle border-b whitespace-nowrap">
+                            <tr>
+                                <td class="pl-6 align-middle border-b whitespace-nowrap">
                                     <p class="font-semibold text-xs text-slate-800">
                                         {{ $inventory->typeRelation->name }}
                                     </p>
@@ -124,17 +122,14 @@
                             </tr>
                         @endforeach
                     </tbody>
-
                 </table>
                 <div class="flex items-center justify-between mb-4">
                     <span class="text-sm text-slate-500">
-                        Showing <span id="entries-to">1 to 10</span> of <span
-                            id="total-entries">{{ $totalEntries }}</span>
+                        Showing <span id="entries-to">1 to 10</span> of <span id="total-entries">{{ $totalEntries }}</span>
                         entries
                     </span>
                     <div class="pagination">
-                        <button id="prev-page" class="px-2 py-1 mx-1 border border-gray-300 rounded-md" disabled>‹
-                            Previous</button>
+                        <button id="prev-page" class="px-2 py-1 mx-1 border border-gray-300 rounded-md" disabled>‹ Previous</button>
                         <span id="page-numbers" class="text-sm font-medium text-slate-700">1</span>
                         <button id="next-page" class="px-2 py-1 mx-1 border border-gray-300 rounded-md">Next ›</button>
                     </div>
@@ -193,25 +188,25 @@
 
     updateEntriesToShow();
 
-    entriesPerPageSelect.addEventListener('change', function() {
+    entriesPerPageSelect.addEventListener('change', function () {
         entriesPerPage = parseInt(entriesPerPageSelect.value);
         currentPage = 1;
         updateEntriesToShow();
     });
 
-    searchInput.addEventListener('input', function() {
+    searchInput.addEventListener('input', function () {
         currentPage = 1;
         updateEntriesToShow();
     });
 
-    prevPageButton.addEventListener('click', function() {
+    prevPageButton.addEventListener('click', function () {
         if (currentPage > 1) {
             currentPage--;
             updateEntriesToShow();
         }
     });
 
-    nextPageButton.addEventListener('click', function() {
+    nextPageButton.addEventListener('click', function () {
         const rows = tableBody.getElementsByTagName('tr');
         const searchTerm = searchInput.value.toLowerCase();
 
@@ -232,38 +227,4 @@
             updateEntriesToShow();
         }
     });
-
-
-    let sortDirections = new Array(8).fill(0); // Array to hold sorting direction for each column
-
-    function sortTable(columnIndex) {
-        const rows = Array.from(tableBody.getElementsByTagName('tr'));
-        let sortedRows;
-
-        if (sortDirections[columnIndex] === 0) {
-            sortedRows = rows.sort((a, b) => {
-                const aText = a.getElementsByTagName('td')[columnIndex].textContent.trim().toLowerCase();
-                const bText = b.getElementsByTagName('td')[columnIndex].textContent.trim().toLowerCase();
-                return aText.localeCompare(bText);
-            });
-            sortDirections[columnIndex] = 1;
-        } else if (sortDirections[columnIndex] === 1) {
-            sortedRows = rows.sort((a, b) => {
-                const aText = a.getElementsByTagName('td')[columnIndex].textContent.trim().toLowerCase();
-                const bText = b.getElementsByTagName('td')[columnIndex].textContent.trim().toLowerCase();
-                return bText.localeCompare(aText);
-            });
-            sortDirections[columnIndex] = 2;
-        } else {
-            sortedRows = rows.sort((a, b) => a.rowIndex - b.rowIndex);
-            sortDirections[columnIndex] = 0;
-        }
-
-        while (tableBody.firstChild) {
-            tableBody.removeChild(tableBody.firstChild);
-        }
-
-        tableBody.append(...sortedRows);
-        updateEntriesToShow();
-    }
 </script>

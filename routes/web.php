@@ -9,6 +9,8 @@ use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Dashboard;
 
 use App\Http\Livewire\InventoryForm;
+use App\Http\Livewire\InventoryFormEdit;
+use App\Http\Controllers\Edit;
 use App\Http\Livewire\LaravelExamples\inventorymanagement;
 
 use App\Http\Controllers\InventoryController;
@@ -33,7 +35,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/add-inventory', InventoryForm::class)->name('add-inventory'); // Use InventoryForm here
     Route::get('/inventory-management', inventorymanagement::class)->name('inventory-management');
 
-    Route::get('/inventory/{id}/edit', [InventoryController::class, 'edit'])->name('inventory.edit');
+    // Route::get('/inventory/{id}/edit', [InventoryController::class, 'edit'])->name('inventory.edit');
+
+    Route::get('/edit-inventory/{inventoryId}', InventoryFormEdit::class)->name('edit-inventory');
+
+    // Route::get('/inventory/edit', [Edit::class, 'edit'])->name('inventory.edit');
     Route::post('/inventory', [InventoryController::class, 'store'])->name('inventory.store');
     Route::delete('/inventory/{id}', [InventoryController::class, 'destroy'])->name('inventory.delete');
 

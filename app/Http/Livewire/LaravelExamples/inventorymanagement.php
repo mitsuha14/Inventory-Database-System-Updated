@@ -8,6 +8,7 @@ use App\Models\Inventory;
 class inventorymanagement extends Component
 {
     public $inventories;
+    public $totalEntries;
 
     public function mount()
     {
@@ -20,6 +21,8 @@ class inventorymanagement extends Component
             'typeRelation',
             'statusRelation'
         ])->get();
+
+
     }
 
     public function render()

@@ -17,4 +17,11 @@ class InventoryController extends Controller
             return redirect()->route('inventory-management')->with('error', 'Failed to delete inventory item.');
         }
     }
+
+    public function edit()
+    {
+        return view('inventory.edit');
+    }
+
+
 }
